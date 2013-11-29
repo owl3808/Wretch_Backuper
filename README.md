@@ -25,7 +25,7 @@ A backuper for wretch albums, use official backup package's URL
 
    __執行Wretch_Backuper.py__  
    只要點兩下執行即可。由於中文編碼部分尚未處理好，在cmd下執行無法正常運作。  
-   在IDE下執行狀況正常。  
+   在IDLE下執行狀況正常。  
 
 
 
