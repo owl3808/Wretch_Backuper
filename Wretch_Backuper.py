@@ -58,9 +58,9 @@ def downfile(url, destdir):
             code.write(f.read())
     except urllib2.HTTPError, err:
         if err.code == 404:
-            print '下載"%s"失敗'%filename
+            print '下載"%s"失敗'%filename.encode('utf-8')
     except ValueError:
-        print 'url為"%s"無法存取'%url
+        print 'url為"%s"無法存取'%url.encode('utf-8')
         
 
 
