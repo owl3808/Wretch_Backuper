@@ -51,16 +51,17 @@ class GetDetailInfo(HTMLParser):
             self.is_table_found=False
 
 def downfile(url, destdir):
-    filename=url.split('/')[-1].split('?')[0]
+    filename=url.split('/')[-1].split('?')[0].decode('utf-8')
     try:
-        f = urllib2.urlopen(url)
-        with open(destdir+'/'+filename, "wb") as code:
+        f = urllib2.urlopen(url.decode('utf-8'))
+        with open(destdir.decode('utf-8')+'/'+filename.decode('utf-8'), "wb") as code:
             code.write(f.read())
     except urllib2.HTTPError, err:
         if err.code == 404:
-            print '下載"%s"失敗'%filename.encode('utf-8')
-    except ValueError:
-        print 'url為"%s"無法存取'%url.encode('utf-8')
+            print '下載"%s"失敗'%filename
+    except ValueError as e:
+        print 'url為"%s"無法存取'%url
+        print e
         
 
 
@@ -108,14 +109,14 @@ for Album in Albums:
 
     # read url file
     try:
-        f= codecs.open(dest+'/'+urlfile,'r','utf-8')
+        f= open(dest+'/'+urlfile,'r')
     except IOError:
         print "Error: 無法找到關聯的URL檔案:%s , 此相簿將放棄備份"%urlfile
         continue
 
     # download each file
     for url in f.readlines():
-        downfile(url.decode('utf-8') ,albumpath.decode('utf-8'))
+        downfile(url ,albumpath)
 
     print '完成'
     
